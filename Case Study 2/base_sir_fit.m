@@ -47,7 +47,7 @@ b = [];
 % Hint: For example, the sum of the initial conditions should be
 % constrained
 % If you don't want such a constraint, keep these matrices empty.
-Af = [1 1 1 1];
+Af = [0 0 0 1 1 1 1];
 bf = 1;
 
 %% set up upper and lower bound constraints
@@ -55,11 +55,11 @@ bf = 1;
 % lb < x < ub
 % here, the inequality is imposed element-wise
 % If you don't want such a constraint, keep these matrices empty.
-ub = []';
-lb = []';
+ub = [0 0 0 0 0 0 0]';
+lb = [1 1 1 0 0 0 0]';
 
 % Specify some initial parameters for the optimizer to start from
-x0 = [(STL_population - 1)/STL_population; 1/STL_population; 0; 0]; 
+x0 = [.05; .01; .10; (STL_population - 1)/STL_population; 1/STL_population; 0; 0]; 
 
 % This is the key line that tries to opimize your model parameters in order to
 % fit the data

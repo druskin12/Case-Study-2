@@ -27,7 +27,7 @@ B = zeros(4,1);
 x0 = [ic_susc; ic_inf; ic_rec; ic_fatality];
 
 % simulate the SIRD model for t time-steps
-sys_sir_base = ss(A,B,eye(4),zeros(4,1),1)
+sys_sir_base = ss(A,B,eye(4),zeros(4,1),1);
 y = lsim(sys_sir_base,zeros(t,1),linspace(0,t-1,t),x0);
 
 % return a "cost".  This is the quantitity that you want your model to
@@ -35,6 +35,6 @@ y = lsim(sys_sir_base,zeros(t,1),linspace(0,t-1,t),x0);
 % modeled data and the true data. Norms and distances will be useful here.
 % Hint: This is a central part of this case study!  choices here will have
 % a big impact!
-f = norm(y(4, t) - data(t, 2)); % can be one line
+f = norm(y(t, 4) - data(t, 2)); % can be one line - do based on infections and deaths
 
 end

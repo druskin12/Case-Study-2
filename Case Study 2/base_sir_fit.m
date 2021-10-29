@@ -5,26 +5,26 @@
 
 COVID_STLcity = zeros(594,2);
 COVID_STLcity = COVID_MO([585:1178], [3:4]);
-STL_population = populations_MO{2, 2} / 1000;
+STL_population = populations_MO{2, 2};
 
-covidstlcity_full = double(table2array(COVID_STLcity(:,[1:2])))./STL_population;
+covidstlcity_full = double(table2array(COVID_STLcity(:,[1:2])))./STL_population/1000;
 
 
 COVID_JEFFERSONcity = zeros(584,2);
 COVID_JEFFERSONcity = COVID_MO([1:584], [3:4]);
-JEFFERSON_population = populations_MO{1, 2} / 1000;
+JEFFERSON_population = populations_MO{1, 2};
 
-covidstlcity_full = double(table2array(COVID_JEFFERSONcity(:,[1:2])))./JEFFERSON_population;
+covidjeffersoncity_full = double(table2array(COVID_JEFFERSONcity(:,[1:2])))./JEFFERSON_population/1000;
 
 
 COVID_SPRINGFIELDcity = zeros(589,2);
 COVID_SPRINGFIELDcity = COVID_MO([1179:1767], [3:4]);
-SPRINGFIELD_population = populations_MO{3, 2} / 1000;
+SPRINGFIELD_population = populations_MO{3, 2};
 
-covidstlcity_full = double(table2array(COVID_SPRINGFIELDcity(:,[1:2])))./SPRINGFIELD_population;
+covidspringfieldcity_full = double(table2array(COVID_SPRINGFIELDcity(:,[1:2])))./SPRINGFIELD_population/1000;
 
-coviddata = ; % TO SPECIFY
-t = ; % TO SPECIFY
+coviddata = covidstlcity_full; % TO SPECIFY
+t = 594; % TO SPECIFY
 
 % The following line creates an 'anonymous' function that will return the cost (i.e., the model fitting error) given a set
 % of parameters.  There are some technical reasons for setting this up in this way.
@@ -59,7 +59,7 @@ ub = []';
 lb = []';
 
 % Specify some initial parameters for the optimizer to start from
-x0 = []; 
+x0 = [(STL_population - 1)/STL_population; 1/STL_population; 0; 0]; 
 
 % This is the key line that tries to opimize your model parameters in order to
 % fit the data

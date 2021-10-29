@@ -17,11 +17,11 @@ ic_rec = x(6);
 ic_fatality = x(7);
 
 % Set up SIRD within-population transmission matrix
-A = [];
+A = [0.95 0.04 0 0; 0.05 0.85 0 0; 0 0.1 1 0; 0 0.01 0 1];
 B = zeros(4,1);
 
 % Set up the vector of initial conditions
-x0 = [];
+x0 = [(STL_population - 1)/STL_population; 1/STL_population; 0; 0];
 
 % simulate the SIRD model for t time-steps
 sys_sir_base = ss(A,B,eye(4),zeros(4,1),1)
@@ -32,6 +32,6 @@ y = lsim(sys_sir_base,zeros(t,1),linspace(0,t-1,t),x0);
 % modeled data and the true data. Norms and distances will be useful here.
 % Hint: This is a central part of this case study!  choices here will have
 % a big impact!
-f = ;
+f = norm(y(4, t) - data(t, 2));
 
 end

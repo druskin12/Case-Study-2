@@ -36,8 +36,10 @@ y = lsim(sys_sir_base,zeros(t,1),linspace(0,t-1,t),x0);
 % Hint: This is a central part of this case study!  choices here will have
 % a big impact!
 Ycompare = zeros(size(data, 1), 2);
+newY(1, 1) = y(1, 2) - ic_inf;
+newY(1, 2) = 
 for i = 2:size(data, 1)
-    Ycompare(i - 1, 1) = y(i, 2) - y(i - 1, 2);
-f = norm(Ycompare(t, 1) - data(t, 1)) + norm(y(t, 4) - data(t, 2)); % can be one line - do based on infections and deaths
+    newY(i, 2) = y(i, 2) - y(i - 1, 2);
+f = norm(newY(t, 2) - data(t, 1)) + norm(newY(t, 4) - data(t, 2)); % can be one line - do based on infections and deaths
 
 end

@@ -7,21 +7,21 @@ COVID_STLcity = zeros(594,2);
 COVID_STLcity = COVID_MO([585:1178], [3:4]);
 STL_population = populations_MO{2, 2};
 
-covidstlcity_full = double(table2array(COVID_STLcity(:,[1:2])))./STL_population/1000;
+covidstlcity_full = double(table2array(COVID_STLcity(:,[1:2])))./STL_population;
 
 
 COVID_JEFFERSONcity = zeros(584,2);
 COVID_JEFFERSONcity = COVID_MO([1:584], [3:4]);
 JEFFERSON_population = populations_MO{1, 2};
 
-covidjeffersoncity_full = double(table2array(COVID_JEFFERSONcity(:,[1:2])))./JEFFERSON_population/1000;
+covidjeffersoncity_full = double(table2array(COVID_JEFFERSONcity(:,[1:2])))./JEFFERSON_population;
 
 
 COVID_SPRINGFIELDcity = zeros(589,2);
 COVID_SPRINGFIELDcity = COVID_MO([1179:1767], [3:4]);
 SPRINGFIELD_population = populations_MO{3, 2};
 
-covidspringfieldcity_full = double(table2array(COVID_SPRINGFIELDcity(:,[1:2])))./SPRINGFIELD_population/1000;
+covidspringfieldcity_full = double(table2array(COVID_SPRINGFIELDcity(:,[1:2])))./SPRINGFIELD_population;
 
 coviddata = covidstlcity_full; % TO SPECIFY
 t = 594; % TO SPECIFY
@@ -55,8 +55,8 @@ bf = 1;
 % lb < x < ub
 % here, the inequality is imposed element-wise
 % If you don't want such a constraint, keep these matrices empty.
-ub = [0 0 0 0 0 0 0]';
-lb = [1 1 1 0 0 0 0]';
+ub = [1 1 1 1 1 1 1]';
+lb = [0 0 0 0 0 0 0]';
 
 % Specify some initial parameters for the optimizer to start from
 x0 = [.05; .01; .10; (STL_population - 1)/STL_population; 1/STL_population; 0; 0]; 

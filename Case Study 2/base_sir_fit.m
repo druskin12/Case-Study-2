@@ -8,6 +8,9 @@ COVID_STLcity = COVID_MO([585:1178], [3:4]);
 STL_population = populations_MO{2, 2};
 
 covidstlcity_full = double(table2array(COVID_STLcity(:,[1:2])))./STL_population;
+for i = 1:594
+    covidstlcity_full(i, 1) = 1 - covidstlcity_full(i, 1);
+end
 
 % Stores day-to-day changes of cases and deaths in STLcity region in
 % columns 1 and 2, respectively, of COVID_STLcity_dayChanges.

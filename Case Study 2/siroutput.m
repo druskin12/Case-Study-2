@@ -17,10 +17,10 @@ ic_rec = x(6);
 ic_fatality = x(7);
 
 % Set up SIRD within-population transmission matrix
-A = [1 - k_infections 0                           .1 0; 
-    k_infections      1 - k_recover - k_fatality  0 0; 
-    0                 k_recover                   .9 0; 
-    0                 k_fatality                  0 1];
+A = [1 - k_infections (k_infections - k_fatality)                               0 0; 
+    k_infections      1 - (k_infections - k_fatality) - k_recover - k_fatality  0 0; 
+    0                 k_recover                                                 1 0; 
+    0                 k_fatality                                                0 1];
 B = zeros(4,1);
 
 % Set up the vector of initial conditions
@@ -35,9 +35,6 @@ y = lsim(sys_sir_base,zeros(t,1),linspace(0,t-1,t),x0);
 % modeled data and the true data. Norms and distances will be useful here.
 % Hint: This is a central part of this case study!  choices here will have
 % a big impact!
-Ycompare = zeros(size(data, 1), 2);
-for i = 2:size(data, 1)
-    Ycompare(i - 1, 1) = y(i, 2) - y(i - 1, 2);
-f = norm(Ycompare(t, 1) - data(t, 1)) + norm(y(t, 4) - data(t, 2)); % can be one line - do based on infections and deaths
+f = norm(y(t, 4) - data(t, 2)); % can be one line - do based on infections and deaths
 
 end

@@ -19,16 +19,13 @@ ic_rec = x(6);
 ic_fatality = x(7);
 
 % Set up SIRD within-population transmission matrix
-A = [1 - k_infections 0                           .1 0; 
-    k_infections      1 - k_recover - k_fatality  0 0; 
-    0                 k_recover                   .9 0; 
-    0                 k_fatality                  0 1];
+A = [0.95 0.04 0 0; 0.05 0.85 0 0; 0 0.1 1 0; 0 0.01 0 1];
 
 % The next line creates a zero vector that will be used a few steps.
 B = zeros(4,1);
 
 % Set up the vector of initial conditions
-x0 = [ic_susc; ic_inf; ic_rec; ic_fatality];
+x0 = [0.9; 0.1; 0; 0];
 
 % Here is a compact way to simulate a linear dynamical system.
 % Type 'help ss' and 'help lsim' to learn about how these functions work!!
